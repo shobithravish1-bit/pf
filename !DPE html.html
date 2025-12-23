@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>🤍</title>
+
+<style>
+*{
+    box-sizing:border-box;
+    font-family:'Segoe UI', sans-serif;
+}
+
+body{
+    margin:0;
+    height:100vh;
+    background: radial-gradient(circle at top, #1b2a4a, #0b1220);
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    color:#e6ecff;
+    overflow:hidden;
+}
+
+/* Soft stars */
+.star{
+    position:absolute;
+    width:2px;
+    height:2px;
+    background:white;
+    opacity:0.6;
+    border-radius:50%;
+    animation: twinkle 3s infinite ease-in-out;
+}
+
+@keyframes twinkle{
+    0%,100%{opacity:0.2;}
+    50%{opacity:0.8;}
+}
+
+/* Container */
+.container{
+    background: rgba(255,255,255,0.06);
+    backdrop-filter: blur(14px);
+    padding:28px;
+    border-radius:26px;
+    width:90%;
+    max-width:380px;
+    text-align:center;
+    animation: fadeIn 1.4s ease;
+}
+
+h1{
+    font-size:22px;
+    margin-bottom:6px;
+    font-weight:500;
+}
+
+p{
+    font-size:14px;
+    opacity:0.85;
+    margin-bottom:22px;
+}
+
+/* Sentence */
+.sentence{
+    min-height:64px;
+    background: rgba(255,255,255,0.08);
+    border-radius:18px;
+    padding:16px;
+    margin-bottom:26px;
+    font-size:18px;
+    font-weight:500;
+    display:flex;
+    justify-content:center;
+    flex-wrap:wrap;
+    gap:8px;
+}
+
+/* Word animation */
+.word{
+    opacity:0;
+    animation: glowIn 0.8s ease forwards;
+}
+
+@keyframes glowIn{
+    from{
+        opacity:0;
+        transform:translateY(10px);
+        text-shadow:none;
+    }
+    to{
+        opacity:1;
+        transform:translateY(0);
+        text-shadow:0 0 6px rgba(255,255,255,0.4);
+    }
+}
+
+/* Button */
+button{
+    padding:12px 28px;
+    border:none;
+    border-radius:30px;
+    background: rgba(255,255,255,0.9);
+    color:#1b2a4a;
+    font-size:15px;
+    font-weight:600;
+    cursor:pointer;
+    animation: breathe 3s infinite ease-in-out;
+}
+
+button:active{
+    transform: scale(0.95);
+}
+
+@keyframes breathe{
+    0%{transform:scale(1);}
+    50%{transform:scale(1.06);}
+    100%{transform:scale(1);}
+}
+
+/* Floating glow */
+.glow{
+    position:absolute;
+    font-size:14px;
+    color:#cfd9ff;
+    opacity:0.7;
+    animation: floatUp 3s ease forwards;
+    pointer-events:none;
+}
+
+@keyframes floatUp{
+    from{opacity:0.7; transform:translateY(0);}
+    to{opacity:0; transform:translateY(-120px);}
+}
+
+@keyframes fadeIn{
+    from{opacity:0; transform:translateY(20px);}
+    to{opacity:1; transform:translateY(0);}
+}
+</style>
+</head>
+
+<body>
+
+<!-- Stars -->
+<script>
+for(let i=0;i<40;i++){
+    const star = document.createElement("div");
+    star.className = "star";
+    star.style.left = Math.random()*100 + "%";
+    star.style.top = Math.random()*100 + "%";
+    star.style.animationDelay = Math.random()*3 + "s";
+    document.body.appendChild(star);
+}
+</script>
+
+<div class="container">
+    <h1></h1>
+    <p>Darling tap slowly</p>
+
+    <div class="sentence" id="sentence"></div>
+
+    <button id="btn" onclick="nextWord()">tap here my love 💖</button>
+</div>
+
+<script>
+const words = [
+    "My darling",
+    "you",
+    "are",
+    "loved",
+    "and",
+    "never",
+    "alone",
+    "with",
+    "me",
+    "happy birthday my love", 
+    "❤️"
+];
+
+let index = 0;
+
+function nextWord(){
+    if(index < words.length){
+        addWord(words[index]);
+        spawnGlow();
+        index++;
+    } else {
+        const btn = document.getElementById("btn");
+        btn.innerText = "Continue ❤️🤗";
+        btn.onclick = goNext;
+    }
+}
+
+function addWord(word){
+    const span = document.createElement("span");
+    span.className = "word";
+    span.innerText = word;
+    document.getElementById("sentence").appendChild(span);
+}
+
+function spawnGlow(){
+    const g = document.createElement("div");
+    g.className = "glow";
+    g.innerText = "✦";
+    g.style.left = Math.random()*80 + "%";
+    g.style.bottom = "30px";
+    document.body.appendChild(g);
+    setTimeout(()=>g.remove(),3000);
+}
+
+function goNext(){
+    window.location.href = "nextpage.html"; // change if needed
+}
+</script>
+
+</body>
+</html>
